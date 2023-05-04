@@ -1,0 +1,41 @@
+<HTML>
+<head>
+    <script>
+		function CalVideoEdge () {
+		console.log ("CAlVIdeoEdge ran");
+			var canvas = document.getElementById("myass");
+			var ctx = canvas.getContext("2d");
+			//https://fiveko.com/image-edge-detection-with-simple-javascript/
+			ctx.filter = new CanvasFilter([
+				  {
+					filter: "convolveMatrix",
+					kernelMatrix: [[0, 1, 0], [1, -4, 1], [0, 1, 0]],
+					 bias: 0,
+					 divisor: 1,
+					 preserveAlpha: "true",
+				  }
+			   ]);
+			ctx.drawImage(MyVideo,0,0);
+		};
+		
+        window.onload = function() {
+		
+			const MyVideo = document.getElementById("MyVideo");
+			MyVideo.addEventListener("load", (e) => {
+				CalVideoEdge ();
+			});
+			setInterval(CalVideoEdge , 33);
+        };
+
+    </script>
+</head>
+<body>
+	<canvas id="myass" width = "640" height = "342"> </canvas>
+	<video id ="MyVideo" muted loop autoplay oncanplay="this.muted=true" width="640" height="342" controls>
+	  <source src="video.mp4" type="video/mp4">
+	
+	Your browser does not support the video tag.
+	</video>
+
+</body>
+</HTML>
