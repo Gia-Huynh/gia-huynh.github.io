@@ -7,13 +7,40 @@
 			var canvas_temp = document.getElementById("tempCanvas"); //
 			var ctxt = canvas_temp.getContext("2d");
 			ctxt.drawImage(MyVideo,0,0);
-			const frame = ctxt.getImageData(0, 0, MyVideo.width, MyVideo.height);
-
+			var frame = ctxt.getImageData(0, 0, MyVideo.width, MyVideo.height);
+			
+			var result = frame.data;
+			
+			/*for (var i = 0; i < result.length; i+=4)
+			{
+				result[i] = result [i] * 0.299 + result[i+1] * 0.587 + result [i+2];
+				result[i+1] = result[i];
+				result[i+2] = result[i];
+			}*/
+			
+			let tempEdge = result.slice();
+			let tempResult = result.slice().map(function(x) x * 4);
+			var gay = 0;
+			for (var i = 0; i < result.length; i+=4)
+			{
+				//0.299R + 0.587G + 0.114B.
+				gay = (tempResult[i] * 0.299 + tempResult[i+1] * 0.587 + tempResult [i+2] * 0.114)
+						- (result[i+4] * 0.299 + result[i+5] * 0.587 + result [i+6] * 0.114)
+						- (tempEdge[i-4] * 0.299 + tempEdge[i-3] * 0.587 + tempEdge [i-2] * 0.114)
+						- (result[i+4*MyVideo.width] * 0.299 + result[i+4*MyVideo.width+1] * 0.587 + result [i+4*MyVideo.width+2] * 0.114)
+						- (tempEdge[i+4*MyVideo.width] * 0.299 + tempEdge[i+4*MyVideo.width+1] * 0.587 + tempEdge [i+4*MyVideo.width+2] * 0.114)
+						;
+				result [i] = gay || 0;
+				result [i+1] = gay || 0;
+				result [i+2] = gay || 0;				
+			};
+			//result = tempEdge.slice();
+			
 			var canvas = document.getElementById("myass"); //MYcAnvAS
 			var ctx = canvas.getContext("2d");
 			//SVG filter
 			//https://fiveko.com/image-edge-detection-with-simple-javascript/
-			ctx.filter = new CanvasFilter([
+			/*ctx.filter = new CanvasFilter([
 				  {
 					filter: "convolveMatrix",
 					kernelMatrix: [[0, 1, 0], [1, -4, 1], [0, 1, 0]],
@@ -22,7 +49,9 @@
 					 preserveAlpha: "true",
 				  }
 			   ]);
-			ctx.drawImage(frame.data,0,0);
+			ctx.drawImage(video,0,0);
+			*/
+			ctx.putImageData(frame,0,0);
 		};
 		
         window.onload = function() {
@@ -46,9 +75,9 @@
 				  align-items: center;
 				  justify-content: center;
 				  margin-top: 5vh;">
-		<canvas style="width:0; height:0;" id="tempCanvas" width = "640" height = "342"> </canvas>
-		<canvas style="padding-right:3vw;" id="myass" width = "640" height = "342"> </canvas>
-		<video style="padding-left:3vw;" id ="MyVideo" src="video.mp4" muted loop autoplay oncanplay="this.muted=true" width="640" height="342" controls>
+		<canvas style="padding-right:1vw;" id="tempCanvas" width = "640" height = "342"> </canvas>
+		<canvas style="padding-right:1vw;" id="myass" width = "640" height = "342"> </canvas>
+		<video style="" id ="MyVideo" src="video.mp4" muted loop autoplay oncanplay="this.muted=true" width="640" height="342" controls>
 		</video>
 	</div>
 
