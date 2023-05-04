@@ -3,6 +3,12 @@
     <script>
 		function CalVideoEdge () {
 		//console.log ("CalVideoEdge ran");
+			
+			var canvas_temp = document.getElementById("tempCanvas"); //
+			var ctxt = canvas_temp.getContext("2d");
+			ctxt.drawImage(MyVideo,0,0);
+			const frame = ctxt.getImageData(0, 0, MyVideo.width, MyVideo.height);
+
 			var canvas = document.getElementById("myass"); //MYcAnvAS
 			var ctx = canvas.getContext("2d");
 			//SVG filter
@@ -16,7 +22,7 @@
 					 preserveAlpha: "true",
 				  }
 			   ]);
-			ctx.drawImage(MyVideo,0,0);
+			ctx.drawImage(frame.data,0,0);
 		};
 		
         window.onload = function() {
@@ -34,15 +40,15 @@
 	<div style = "text-align: center; margin:0;margin-top:5vh;">
 		<h1 style = "font-size: 3vh; color: #ffffff; margin:0.5vh;"> Bài tập đồ họa ứng dụng </h1>
 		<p style = "font-size: 3vh; color: #ffffff; margin:0.5vh;"> Huỳnh Thiết Gia <br> 20120070 </p>
+		<p style = "font-size: 2vh; color: #ffffff; margin:0.5vh;"> Chỉ chạy được trên Chromium browser (Chrome, Edge) </p>
 	</div>
 	<div style = "display: flex;
 				  align-items: center;
 				  justify-content: center;
 				  margin-top: 5vh;">
+		<canvas style="width:0; height:0;" id="tempCanvas" width = "640" height = "342"> </canvas>
 		<canvas style="padding-right:3vw;" id="myass" width = "640" height = "342"> </canvas>
-		<video style="padding-left:3vw;" id ="MyVideo" muted loop autoplay oncanplay="this.muted=true" width="640" height="342" controls>
-			<source src="video.mp4" type="video/mp4">
-			Your browser does not support the video tag.
+		<video style="padding-left:3vw;" id ="MyVideo" src="video.mp4" muted loop autoplay oncanplay="this.muted=true" width="640" height="342" controls>
 		</video>
 	</div>
 
