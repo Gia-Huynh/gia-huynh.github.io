@@ -1,93 +1,511 @@
-<HTML>
-<head>
-    <script>
-		function CalVideoEdge () {
-		
-			
-			var canvas_temp = document.getElementById("tempCanvas"); //
-			var ctxt = canvas_temp.getContext("2d", { willReadFrequently: true });
-			ctxt.drawImage(MyVideo,0,0);
-			var frame = ctxt.getImageData(0, 0, MyVideo.width, MyVideo.height);
-			
-			var result = frame.data;
-			
-			for (var i = 0; i < result.length; i+=4)
-			{
-				result[i] = result [i] * 0.299 + result[i+1] * 0.587 + result [i+2] * 0.114;
-			}
-			
-			let tempEdge = result.slice();
-			//let tempResult = result.slice().map(x=> x * -4);
-			var gay = 0;
-			for (var i = 0; i < result.length; i+=4)
-			{
-				//0.299R + 0.587G + 0.114B.
-				gay = result[i] * -4
-						+ tempEdge[i+4]
-						+ tempEdge[i-4]
-						+ tempEdge[i+4*MyVideo.width]
-						+ tempEdge[i-4*MyVideo.width]
-						;
-				result [i] = gay || 0;
-				result [i+1] = result [i];
-				result [i+2] = result [i];				
-			};			
-			var canvas = document.getElementById("myass"); //MYcAnvAS
-			var ctx = canvas.getContext("2d");
-			ctx.putImageData(frame,0,0);
-		};
-		function CanvasFilterChrome () {
-			var canvas_temp = document.getElementById("leftCanvas"); //
-			var ctxt = canvas_temp.getContext("2d", { willReadFrequently: true });
-			//SVG filter
-			//https://fiveko.com/image-edge-detection-with-simple-javascript/
-			ctxt.filter = new CanvasFilter([
-				  {
-					filter: "convolveMatrix",
-					kernelMatrix: [[0, 1, 0], [1, -4, 1], [0, 1, 0]],
-					 bias: 0,
-					 divisor: 1,
-					 preserveAlpha: "true",
-				  }
-			   ]);
-			ctxt.drawImage(MyVideo,0,0);
-		}
-		
-        window.onload = function() {
-		
-			const MyVideo = document.getElementById("MyVideo");
-			MyVideo.addEventListener("load", (e) => {
-				CalVideoEdge ();
-			});
-			
-			//Comment dòng 65 đi và set số 333 thành 16 để test tốc độ của code cây nhà lá vườn.
-			//Hoặc comment đi dòng 66 và để yên dòng 65 để xem tốc độ của hàm có sẵn.
-			setInterval(CanvasFilterChrome , 33);
-			setInterval(CalVideoEdge , 333);
-        };
+<!DOCTYPE html><html lang=en><meta charset=utf-8><meta name=viewport content="width=device-width, initial-scale=1.0"><title>Parcel Vanilla App</title><link rel=stylesheet href=/my-parcel-app.d09ac381.css><body>
+    <h1> Gia Huỳnh </h1>
+	<p> software dev </p>
+	<div style=text-align:center;flex-flow:column;display:flex>
+		<h2> Skillset &amp; Experience </h2>
+		<div class=MyCoolList>
+			<ul style=width:33%>
+				<h3> Languages </h3>
+				<li> 
+					<div class=hover-container>
+					  Python
+					  <div class=hover-box>
+						<p>
+							Experience: A LOT (Like a lot).<br>
+							• Trained Google's Transformer T5 model on BillSum dataset to summarize an input paragraph. <br>
+						</p>
+					  </div>
+					</div>
+				</li>
+				<li> 
+					<div class=hover-container>
+					 C++
+					  <div class=hover-box>
+						<p>
+							Experience:<br>
+							• <br>
+						</p>
+					  </div>
+					</div>
+				</li>
+				<li>
+					<div class=hover-container>
+					  C#
+					  <div class=hover-box>
+						<p>
+						  Experience:<br>
+						  • Template <br>
+						</p>
+					  </div>
+					</div>
+				</li>
 
-    </script>
-</head>
-<body style = "background-color: #222222;">
-	<div style = "text-align: center; margin:0;margin-top:5vh;">
-		<h1 style = "font-size: 3vh; color: #ffffff; margin:0.5vh;"> Bài tập đồ họa ứng dụng </h1>
-		<p style = "font-size: 3vh; color: #ffffff; margin:0.5vh;"> Huỳnh Thiết Gia <br> 20120070 </p>
-		<p style = "font-size: 2vh; color: #ffffff; margin:0.5vh;"> Ở giữa là sử dụng api CanvasFilter đang trong giai đoạn experimental, chỉ được Chrome và Edge hỗ trợ, nhưng chạy rất nhanh.
-			<br> Bên phải là code cây nhà lá vườn, GetImageData xong rồi chuyển data sang grayscale rồi for loop và Laplacian Filter. 
-			<br> Đôi lúc cái ở giữa bị khựng là vì phải xử lý cái bên phải. <br> [Dòng 63 file html] Nếu chạy riêng từng cái thì cái ở giữa cực mượt, real time luôn, còn cái bên phải thì chắc tầm 15fps hay gì đó.
+				<li>
+					<div class=hover-container>
+					  Lisp
+					  <div class=hover-box>
+						<p>
+						  Experience:<br>
+						  • Template <br>
+						</p>
+					  </div>
+					</div>
+				</li>
+
+				<li>
+					<div class=hover-container>
+					  SQL
+					  <div class=hover-box>
+						<p>
+						  Experience:<br>
+						  • Template <br>
+						</p>
+					  </div>
+					</div>
+				</li>
+
+				<li>
+					<div class=hover-container>
+					  JavaScript (Node.Js, React)
+					  <div class=hover-box>
+						<p>
+						  Experience:<br>
+						  • Template <br>
+						</p>
+					  </div>
+					</div>
+				</li>
+
+				<li>
+					<div class=hover-container>
+					  HTML + CSS
+					  <div class=hover-box>
+						<p>
+						  Experience:<br>
+						  • Template <br>
+						</p>
+					  </div>
+					</div>
+				</li>
+			</ul>
+			<ul style=width:33%>
+				<h3> Libraries </h3>
+				<li>
+				  <div class=hover-container>
+					PyTorch
+					<div class=hover-box>
+					  <p>Experience:<br>• Template</p>
+					</div>
+				  </div>
+				</li>
+
+				<li>
+				  <div class=hover-container>
+					OpenCv (C++/Python)
+					<div class=hover-box>
+					  <p>Experience:<br>• Template</p>
+					</div>
+				  </div>
+				</li>
+
+				<li>
+				  <div class=hover-container>
+					MLflow
+					<div class=hover-box>
+					  <p>Experience:<br>• Template</p>
+					</div>
+				  </div>
+				</li>
+
+				<li>
+				  <div class=hover-container>
+					Scikit-Learn
+					<div class=hover-box>
+					  <p>Experience:<br>• Template</p>
+					</div>
+				  </div>
+				</li>
+
+				<li>
+				  <div class=hover-container>
+					Pandas
+					<div class=hover-box>
+					  <p>Experience:<br>• Template</p>
+					</div>
+				  </div>
+				</li>
+
+				<li>
+				  <div class=hover-container>
+					Numpy
+					<div class=hover-box>
+					  <p>Experience:<br>• Template</p>
+					</div>
+				  </div>
+				</li>
+
+				<li>
+				  <div class=hover-container>
+					Flask
+					<div class=hover-box>
+					  <p>Experience:<br>• Template</p>
+					</div>
+				  </div>
+				</li>
+
+				<li>
+				  <div class=hover-container>
+					PyQT
+					<div class=hover-box>
+					  <p>Experience:<br>• Template</p>
+					</div>
+				  </div>
+				</li>
+			  </ul>
+			<ul style=width:33%>
+				<h3> Tools and Misc. </h3>
+				    <li>
+					  <div class=hover-container>
+						Git
+						<div class=hover-box>
+						  <p>Experience:<br>• Template</p>
+						</div>
+					  </div>
+					</li>
+
+					<li>
+					  <div class=hover-container>
+						Docker
+						<div class=hover-box>
+						  <p>Experience:<br>• Template</p>
+						</div>
+					  </div>
+					</li>
+
+					<li>
+					  <div class=hover-container>
+						Aws
+						<div class=hover-box>
+						  <p>Experience:<br>• Template</p>
+						</div>
+					  </div>
+					</li>
+
+					<li>
+					  <div class=hover-container>
+						PostgreSQL
+						<div class=hover-box>
+						  <p>Experience:<br>• Template</p>
+						</div>
+					  </div>
+					</li>
+
+					<li>
+					  <div class=hover-container>
+						SQLite
+						<div class=hover-box>
+						  <p>Experience:<br>• Template</p>
+						</div>
+					  </div>
+					</li>
+
+					<li>
+					  <div class=hover-container>
+						Jira
+						<div class=hover-box>
+						  <p>Experience:<br>• Template</p>
+						</div>
+					  </div>
+					</li>
+
+					<li>
+					  <div class=hover-container>
+						Postman
+						<div class=hover-box>
+						  <p>Experience:<br>• Template</p>
+						</div>
+					  </div>
+					</li>
+
+					<li>
+					  <div class=hover-container>
+						Latex
+						<div class=hover-box>
+						  <p>Experience:<br>• Template</p>
+						</div>
+					  </div>
+					</li>
+
+					<li>
+					  <div class=hover-container>
+						Linux
+						<div class=hover-box>
+						  <p>Experience:<br>• Template</p>
+						</div>
+					  </div>
+					</li>
+			</ul>
+		</div>
+	</div>
+	<h2> Projects </h2>
+	<ul>
+	  <h3> NLP </h3>
+	  <li>
+		<a target=_blank href=https://github.com/Gia-Huynh/HocThongKe_TextSummarization class=hover-container>
+		  Text Summarization
+		  <div class=hover-box>
+			<p>
+			  • Trained Google's Transformer T5 model on BillSum dataset to summarize an input paragraph. <br>
+			  • The model achieves equal score to Google’s original T5 paper. <br>
+			  • Built a Django-hosted web page for demonstration, SQLite to store summarization history. <br>
 			</p>
-	</div>
-	<div style = "display: flex;
-				  align-items: center;
-				  justify-content: center;
-				  margin-top: 5vh;">
-				  
-		<video style="padding-right:1vw;" id ="MyVideo" src="video.mp4" muted loop autoplay oncanplay="this.muted=true" width="640" height="342" controls>
-		<canvas id="tempCanvas" width = "640" height = "342"> </canvas>
-		</video>
-		<canvas style="padding-right:1vw;" id="leftCanvas" width = "640" height = "342"> </canvas>
-		<canvas style="" id="myass" width = "640" height = "342"> </canvas>
-	</div>
+			<img src=/TextSummarization.1f5cac08.png width=100% height=100% alt=TextSummarization loading=lazy>
+		  </div>
+		</a>
+	  </li>
 
-</body>
-</HTML>
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  News Recommendation/Plagiarism Check 
+		  <div class=hover-box>
+			<p>
+			  • Extracted the Encoder Vector from the Text Summarization model to represent article content. <br>
+			  • Compared the cosine similarity of the vectors of multiple news articles to get the most relevant articles based on the one you pick. <br>
+			  • Adapted the system for Plagiarism detection based on textual similarity.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+	  <h3> Computer Vision </h3>
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Indoor Navigation for the Visual Impaired
+		  <div class=hover-box>
+			<p>
+			  • Intergrated Yolo model to backend server to detect object in image. <br>
+			  • Added Opencv Object Tracking to reduce computation needed for video processing. <br>
+			  • Reduced computation needed by 95% while maintaining accuracy. <br>
+			  • Combined with Depth Estimation model to compute a suitable path for collision avoidance. <br>
+			</p>
+			<img src=/IndoorNav.4e30e488.jpg width=100% height=100%>
+		  </div>
+		</a>
+	  </li>
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Image Captioning Project
+		  <div class=hover-box>
+			<p>
+			  • Combined Vision Transformer with Language Model to create a locally hosted image/video captioning server that works with both mobile phone app and desktop web page. <br>
+			  • Hosted the demonstration page on RESTful Flask server with PostgreSQL database. <br>
+			  • Integrated HuggingFace’s ViT model to the aforementioned Flask server. <br>
+			  • Ulitlizing React on the desktop webpage to communicate with the server, with user's registration and login scheme, user private directory, private links, captioning history…
+			</p>
+			<img src=/ImgCaptioning.5a96ed97.png width=100% height=100%>
+		  </div>
+		</a>
+	  </li>
+
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Aruco Marker Tracking
+		  <div class=hover-box>
+			<p>
+			  • Used OpenCv on C++ to track a paper marked with Aruco Marker and normalize the position of content inside it, regardless of orientation and photo angle. <br>
+			  • Application in human pose tracking, QR code reading, courier service label reader.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  VR Video Generator
+		  <div class=hover-box>
+			<p>
+			  • Adapted ResNet model to train on custom dataset to segment “person” class from a video. <br>
+			  • Combined with MiDaS depth estimation to create an estimate of depth in a video. <br>
+			  • Aiming to generate a side-by-side VR videos to stream on Oculus Quest.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Simple Image Segmentation
+		  <div class=hover-box>
+			<p>
+			  • Trained a U-Net Deep Learning model from scratch on the COCO dataset. <br>
+			  • Enabled the model to segment classes of objects from each other in an image.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  SLIC SuperPixel Algorithm Visualization
+		  <div class=hover-box>
+			<p>
+			  • Visualizing the generation of SuperPixel from image, showing the execution step-by-step of the SLIC algorithm. <br>
+			  • Optimized the algorithm's speed with Numpy’s Matrix Multiplication instead of a traditional for-loop, yielding a 50% speedup compared to the original codebase.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Image Perspective Correction
+		  <div class=hover-box>
+			<p>
+			  • Forked an original, non-working repository for a JavaScript project about utilizing OpenCv2 on JavaScript to “reverse-perspective-warp” a 2D plane in an image. <br>
+			  • Fixed bugs and logic errors to make it functional, and added a Flask demo for the algorithm.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Laser to Tablet
+		  <div class=hover-box>
+			<p>
+			  • Experimented with Python and OpenCV to process live webcam images, capturing laser dot movement and converting it into mouse movement for a remote, touch-free mouse operation. <br>
+			  • Pre-processing input images to standardize it and reducing noises.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Eigenfaces
+		  <div class=hover-box>
+			<p>
+			  • Utilizing Principal Component Analysis to generate Eigenvectors from a dataset of face images, encoding each faces as a combination of Eigenfaces. <br>
+			  • Usable in Facial Recognition System, or lossy data compression down by 70% of the original file size.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  3D IO Shield model generator from images
+		  <div class=hover-box>
+			<p>
+			  • Converted manufacturer’s IO shield image to a 3D printable model file. <br>
+			  • Apply image morphology algorithms with OpenCv. <br>
+			  • Deployed the application with Flask and Docker on a self hosted machine.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+	  <h3> General Project </h3>
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Mini-Coursera Project
+		  <div class=hover-box>
+			<p>
+			  • Developed a Coursera-style learning platform as part of a sophomore project. <br>
+			  • Built a Node.Js application with Agile software development methodology.
+			</p>
+		  </div>
+		</a>
+	  </li>
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  League of Legends Rehabilitation App
+		  <div class=hover-box>
+			<p>
+			  • Developed an app checking for the user's total playtime and shut down the game if it exceeded the user-defined threshold to combat League of Legends gaming addiction. <br>
+			  • Used PyQT for user interface.
+			</p>
+		  </div>
+		</a>
+	  </li>
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Fox and Geese Game Playing Agent
+		  <div class=hover-box>
+			<p>
+			  • Gaming agent utilizing Alpha-Beta pruning search algorithm to efficiently play Fox and Geese board game. <br>
+			  • Optimized heuristic contains Potential Field Function, Breath-First Search, Exploration-Exploitation Balancing. <br>
+			  • Achives second place in class competition.
+			</p>
+		  </div>
+		</a>
+	  </li>
+	  <h3> "Project"? </h3>
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Trivial University works
+		  <div class=hover-box>
+			<p>
+			  • Coded the Baillie–PSW pseudoprime test for the BigNum problem in C++. <br>
+			  • Coded BFS, DFS, A*, Heuristic search Algorithm in Python. <br>
+			  • Excel folder content fuzzy search. <br>
+			  • Competitive Programming experience.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Plasma CNC building
+		  <div class=hover-box>
+			<p>
+			  • Built an Arduino CNC Shield to build a homemade cnc machine, 3D printed an adapter for the plasma torch and control the torch pulse using Arduino, wrap the controller board in E.M.I resisting material and successfully deployed the machine for real world application.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Self-hosting
+		  <div class=hover-box>
+			<p>
+			  • Built a Web hosting/Nas machine running Debian Mint Linux. <br>
+			  • Hands on experience with Apache, Nginx, SSL Certification creation, multi-drive configuring, Docker.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  Office work
+		  <div class=hover-box>
+			<p>
+			  • University coursework required me to master basic office suite like Canva, Latex, Markdown, Microsoft Word/Excel/Powerpoint.
+			</p>
+		  </div>
+		</a>
+	  </li>
+
+	  <li>
+		<a target=_blank href=https://example.com class=hover-container>
+		  3D Engineering Software Experience
+		  <div class=hover-box>
+			<p>
+			  • Used Sketchup quite a lot to do 3D modelling, made many practical models with it.
+			</p>
+		  </div>
+		</a>
+	  </li>
+	</ul>
+
+	<h2> Open Source Contribution </h2>
+	https://github.com/DepthAnything/Depth-Anything-V2/pull/284
+	https://github.com/WinKawaks/SketchDreamer/pull/4
+  
+
